@@ -1,0 +1,3 @@
+<apex:page docType="html-5.0" title="Support" extensions="CylanceCaseCreateController" standardController="Case" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyhtmlTag="false">
+  
+</apex:page>

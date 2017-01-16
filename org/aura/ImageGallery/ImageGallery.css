@@ -1,0 +1,67 @@
+.THIS {
+    text-align: center;
+}
+.THIS.images{
+    margin: 20px 100px;
+    padding: 10px;
+    border: 4px solid rgb(250, 87, 38);
+    border-radius: 8px;
+}
+.THIS .image-wrapper{
+    padding: 20px;
+    display: inline-block; 
+    width: 19%;
+}
+
+.THIS .search-button {
+    position: absolute;
+    margin-left: -28px;
+    margin-top: 7px;
+}
+
+.THIS .search-button img{
+    height: 17px;
+	width: 17px;
+}
+
+.THIS .search-button button {
+    height: 17px;
+	width: 17px;
+    position: absolute;
+    margin-left: -17px;
+    margin-top: -1px;
+    opacity: 0;
+}
+
+.THIS.search span {
+    font-size: 22px;
+    margin-right: 5px;
+}
+
+.THIS.search * {
+    display: inline;
+}
+
+.THIS.search .btn:before {
+    content: " ";
+    background-image: url("http://image.flaticon.com/icons/svg/149/149401.svg>");
+}
+
+.THIS.search input {
+    color: black;
+    background: white;    
+    border: 4px solid white;
+    border-radius: 8px;
+    width: 500px;
+}
+
+.THIS .image {
+    height: 160px;
+    width: 200px;
+    display: block;
+}
+
+.THIS .image-wrapper span {
+    display: block;
+    color: red;
+}

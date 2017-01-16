@@ -1,0 +1,16 @@
+<aura:component controller="ImageGalleryController">
+	Hello, world!
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:iteration items="{!v.images}" var="image">
+    	<div class="image-block">
+            <img src="{!image.url}" height="300px" width="200px"/>
+        	<span>{!image.name}</span>
+        </div>
+    </aura:iteration>
+    
+    azaza
+    
+  
+    
+</aura:component>

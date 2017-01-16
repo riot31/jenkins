@@ -1,0 +1,7 @@
+<!-- @@
+ABOUT ME: Show detail of a selected case.
+DEVELOPED BY: Grazitti Interactive@@    
+-->
+<apex:page standardController="Case" docType="html-5.0" title="Support" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyhtmlTag="false">
+
+</apex:page>

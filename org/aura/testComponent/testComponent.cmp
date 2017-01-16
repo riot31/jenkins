@@ -1,0 +1,5 @@
+<aura:component controller="ImageGalleryController">
+    hello
+    
+    <ui:button label="test press" press="{!c.myAction}"/>
+</aura:component>

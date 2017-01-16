@@ -1,0 +1,19 @@
+<aura:component controller="ImageGalleryController">
+  	 <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <div class="search">
+        <ui:inputText aura:id="textsearch" label="Search" change="{!c.search}" placeholder="Search" value=""/>
+        <div class="search-button">
+            <img src="http://image.flaticon.com/icons/svg/149/149401.svg" height="224" width="224"/>
+            <ui:button label="" press="{!c.search}"/>
+        </div>        
+    </div>
+    
+    <div class="images" style="height: 400px; overflow: auto;">
+        <aura:iteration items="{!v.images}" var="image">
+            <div class="image-wrapper">
+                <img class="image" src="{!image.Url}" />
+                <span>{!image.Name}</span>   
+            </div>
+        </aura:iteration> 
+    </div>      	
+</aura:component>

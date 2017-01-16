@@ -1,0 +1,37 @@
+<apex:page sidebar="false" showHeader="false" controller="ImageUploadController">
+    <apex:includeLightning />
+    <apex:stylesheet value="{!URLFOR($Resource.TestStyle)}"/> 
+       
+       
+<body>
+    <apex:form enctype="multipart/form-data">
+        <apex:pageMessages />
+        <div class="info">
+            <span>
+                Upload Your image
+                <label class="myFile">              
+                    <img src="http://wscont1.apps.microsoft.com/winstore/1x/c37a9d99-6698-4339-acf3-c01daa75fb65/Icon.13385.png" alt="" />
+                    <apex:inputFile value="{!document.body}" filename="{!document.name}" ContentType="{!document.type}" id="file" required="" />
+                </label>
+            </span>
+            <span>
+                OR
+            </span>
+            <span>
+                Select From the already uploaded
+            </span>
+        </div>
+        <div id="lightning"/>
+        <div class="send-button">
+            <apex:commandButton action="{!upload}" value="INSERT IMAGE"/>
+        </div>
+    </apex:form>
+    
+	
+<script>    
+    $Lightning.use('oez:testLeg', function() {
+        $Lightning.createComponent("oez:ImageGallery", {},"lightning",function(cmp) {});
+    });    
+</script>
+</body>               
+</apex:page>
