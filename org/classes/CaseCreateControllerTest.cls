@@ -19,7 +19,7 @@ private class CaseCreateControllerTest{
             PageReference pageRef = Page.CylanceNewCasePage;
             pageRef.getParameters().put('id', String.valueOf(caseRec.Id));
             Test.setCurrentPage(pageRef);   
-            System.assertNotEquals(null, caseCreateController.Save());            
+            System.assertEquals(null, caseCreateController.Save());            
         }
         test.stoptest();
     }
@@ -92,7 +92,7 @@ private class CaseCreateControllerTest{
             PageReference pageRef = Page.CylanceNewCasePage;
             pageRef.getParameters().put('id', String.valueOf(caseRec.Id));
             Test.setCurrentPage(pageRef);   
-            System.assertNotEquals(null, caseCreateController.Save());
+            System.assertEquals(null, caseCreateController.Save());
             
             Case caseRec2 = CylanceCommunityUtilityTest.createCaseWithEmptyDescriptionInTestClass();
             insert caseRec2;

@@ -1,0 +1,17 @@
+<apex:page sidebar="false" showHeader="false">
+    <apex:includeLightning />
+    <apex:stylesheet value="{!URLFOR($Resource.TestStyle)}"/> 
+       
+       
+<body>
+    
+        <div id="lightning"/>
+    
+    
+<script>    
+    $Lightning.use('oez:testLeg', function() {
+        $Lightning.createComponent("oez:Documents", {},"lightning",function(cmp) {});
+    });    
+</script>
+</body>               
+</apex:page>

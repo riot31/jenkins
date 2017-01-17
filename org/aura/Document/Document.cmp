@@ -1,0 +1,27 @@
+<aura:component >
+    
+    <aura:attribute name="row" type="Document" required="true" description="values in row" /> 
+    
+    <tr class="slds-hint-parent">
+        <th scope="row" data-label="Document Name">
+            <div class="slds-truncate" title="Understand Your Bill">{!v.row.Name}</div>
+        </th>
+        <td role="gridcell" data-label="Document Category">
+            <div class="slds-truncate" title="Guides">{!v.row.Folder.Name}</div>
+        </td>
+        <td role="gridcell" data-label="Post Date">
+            <div class="slds-truncate" title="August 15, 2016">
+                <ui:outputDate format="MMMM d, YYYY" value="{!v.row.CreatedDate}"/>
+            </div>
+        </td>
+        <td role="gridcell" data-label="Download">
+            <div class="slds-truncate slds-align-middle" title="Download">
+                <a href="#">
+                    <span class="slds-icon_container">
+                        <span class="slds-assistive-text">Download</span>
+                    </span>Download
+                </a>
+            </div>
+        </td>
+    </tr>
+</aura:component>
