@@ -1,12 +1,105 @@
 <project name="Sample usage of Salesforce Ant tasks" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
-
     <property file="build.properties"/>
     <property environment="env"/>
+	
+	 <tstamp>
+        <format property="todayDate" pattern="MM-dd-yyyy_HH-mm-ss" />
+        <format property="todayDate_only" pattern="MM-dd-yyyy" />
+    </tstamp>
+    <!-- subtract 2 days from Today -->
+    <tstamp>
+        <format property="twoDaysAgo" pattern="yyyy-MM-dd" offset="-2"/>
+    </tstamp>
+	
+	<macrodef name="export_Account">
+        <attribute name="file"/>
+        <attribute name="object"/>
+        <attribute name="soql"/>
+        <attribute name="userName"/>
+        <attribute name="password"/>
+        <attribute name="serverURL"/>
+        <attribute name="batchSize"/>
+        <attribute name="limit"/> 
 
-    <!-- Setting default value for username, password and session id properties to empty string 
-         so unset values are treated as empty. Without this, ant expressions such as ${sf.username}
-         will be treated literally.
-    -->
+        <sequential>
+            <echo message="Exporting @{object}"/>
+            <mkdir dir="exports/${todayDate_only}"/>
+            <mkdir dir="logs/${todayDate_only}"/>
+            <copy file="config/template-process-conf.xml" tofile="config/process-conf.xml" overwrite="true" failonerror="true"/>
+            <replace file="config/process-conf.xml">
+                <replacefilter token="_object_" value="@{object}"/>
+                <replacefilter token="_soql_" value="@{soql} LIMIT @{limit}"/>
+                <replacefilter token="_file_" value="exports/${todayDate_only}/@{file}.csv"/>
+                <replacefilter token="_serverURL_" value="@{serverURL}"/>
+                <replacefilter token="_userName_" value="@{username}"/>
+                <replacefilter token="_password_" value="@{password}"/>
+                <replacefilter token="_batchSize_" value="@{batchSize}"/>
+                <replacefilter token="_logFile_" value="logs/${todayDate_only}/@{file}_log.csv"/>
+            </replace>
+            <java classname="com.salesforce.dataloader.process.ProcessRunner" classpath="lib/dataloader-38.0.1-uber.jar" failonerror="true">
+                <sysproperty key="salesforce.config.dir" value="config"/>
+                <arg line="process.name=@{object}"/>
+            </java>
+            <copy file="exports/${todayDate_only}/@{file}.csv" tofile="exports/${todayDate_only}/@{file}_Updated.csv" overwrite="true" failonerror="true"/>
+            <replace file="exports/${todayDate_only}/@{file}_Updated.csv">
+                <replacefilter token="UW Created" value="Ready for Sales"/>
+                <replacefilter token="UW Executed" value="Ready for Sales"/>
+            </replace>
+        </sequential>
+    </macrodef>
+    <macrodef name="update_Account">
+        <attribute name="file"/>
+        <attribute name="object"/>
+        <attribute name="userName"/>
+        <attribute name="password"/>
+        <attribute name="serverURL"/>
+        <attribute name="batchSize"/>
+        <attribute name="mappingFile"/>
+
+        <sequential>
+            <echo message="Updating @{object}"/>
+            <mkdir dir="exports/${todayDate_only}"/>
+            <mkdir dir="logs/${todayDate_only}"/>
+            <copy file="config/template-process-conf_update.xml" tofile="config/process-conf.xml" overwrite="true" failonerror="true"/>
+            <replace file="config/process-conf.xml">
+                <replacefilter token="_object_" value="@{object}"/>
+                <replacefilter token="_file_" value="exports/${todayDate_only}/@{file}_Updated.csv"/>
+                <replacefilter token="_serverURL_" value="@{serverURL}"/>
+                <replacefilter token="_userName_" value="@{username}"/>
+                <replacefilter token="_password_" value="@{password}"/>
+                <replacefilter token="_batchSize_" value="@{batchSize}"/>
+                <replacefilter token="_logFile_" value="logs/${todayDate_only}/@{file}_log.csv"/>
+                <replacefilter token="_opSuccess_" value="logs/${todayDate_only}/@{file}_log_Success.csv"/>
+                <replacefilter token="_opError_" value="logs/${todayDate_only}/@{file}_log_error.csv"/>
+                <replacefilter token="_mappingFile" value="@{mappingFile}"/>
+            </replace>
+            <java classname="com.salesforce.dataloader.process.ProcessRunner" classpath="lib/dataloader-38.0.1-uber.jar" failonerror="true">
+                <sysproperty key="salesforce.config.dir" value="config"/>
+                <arg line="process.name=@{object}"/>
+            </java>
+        </sequential>
+    </macrodef>
+    <target name="loader">
+        <export_Account
+            file="Account_backup-${todayDate}"
+            object="Account"
+            soql="Select Id, Name,oez__IsBlackListed__c from Account "
+            userName="${sf.username}"
+            password="${sf.ant.password}"
+            serverURL="${sf.serverurl}"
+            batchSize="200"
+            limit = "1000" /> 
+
+        <update_Account
+            file="Account_backup-${todayDate}"
+            object="Account"
+            userName="${sf.username}"
+            password="${sf.ant.password}"
+            serverURL="${sf.serverurl}"
+            batchSize="1"
+            mappingFile="config/AccountFields.sdl"/>
+    </target>
+
     <condition property="sf.username" value=""> <not> <isset property="sf.username"/> </not> </condition>
     <condition property="sf.password" value=""> <not> <isset property="sf.password"/> </not> </condition>
     <condition property="sf.sessionId" value=""> <not> <isset property="sf.sessionId"/> </not> </condition>

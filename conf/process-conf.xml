@@ -1,0 +1,26 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="Account" class="com.salesforce.dataloader.process.ProcessRunner" singleton="false">
+    <description>TemplatedCsvExtract extracts to a CSV file."</description>
+    <property name="name" value="TemplatedCsvExtract"/>
+    <property name="configOverrideMap"> 
+       <map>
+            <entry key="process.encryptionKeyFile" value="config/key.txt"/>
+            <entry key="sfdc.endpoint" value="https://login.salesforce.com"/>
+            <entry key="sfdc.username" value="riot31@example.com"/>
+            <entry key="sfdc.password" value="77b806acf64b2895c85adfc514869bd3"/>
+            <entry key="sfdc.debugMessages" value="false"/>
+            <entry key="sfdc.timeoutSecs" value="6000"/>
+            <entry key="sfdc.extractionRequestSize" value="1"/>
+            <entry key="process.operation" value="update"/>
+            <entry key="dataAccess.type" value="csvRead"/>
+            <entry key="sfdc.entity" value="Account"/>
+            <entry key="dataAccess.name" value="exports/01-18-2017/Account_backup-01-18-2017_10-57-33_Updated.csv"/>
+            <entry key="sfdc.debugMessagesFile" value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log.csv"/>
+            <entry key="process.mappingFile"  value="config/AccountFields.sdl"/>
+            <entry key="process.outputError"  value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log_error.csv"/>
+            <entry key="process.outputSuccess" value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log_Success.csv"/>
+        </map>
+     </property> 
+    </bean>
+</beans>

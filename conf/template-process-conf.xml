@@ -1,0 +1,24 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="_object_" class="com.salesforce.dataloader.process.ProcessRunner" singleton="false">
+    <description>TemplatedCsvExtract extracts to a CSV file."</description>
+    <property name="name" value="TemplatedCsvExtract"/>
+    <property name="configOverrideMap">
+    <map>
+        <entry key="process.encryptionKeyFile" value="config/key.txt"/>
+        <entry key="sfdc.endpoint" value="_serverURL_"/>
+        <entry key="sfdc.username" value="_userName_"/>
+        <entry key="sfdc.password" value="_password_"/>
+        <entry key="sfdc.debugMessages" value="false"/>
+        <entry key="sfdc.timeoutSecs" value="6000"/>
+        <entry key="sfdc.extractionRequestSize" value="_batchSize_"/>
+        <entry key="process.operation" value="extract"/>
+        <entry key="dataAccess.type" value="csvWrite"/>
+        <entry key="sfdc.entity" value="_object_"/>
+        <entry key="sfdc.extractionSOQL" value="_soql_"/>
+        <entry key="dataAccess.name" value="_file_"/>
+        <entry key="sfdc.debugMessagesFile" value="_logFile_"/>
+    </map>
+    </property>
+    </bean>
+</beans>
