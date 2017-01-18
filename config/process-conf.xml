@@ -15,11 +15,11 @@
             <entry key="process.operation" value="update"/>
             <entry key="dataAccess.type" value="csvRead"/>
             <entry key="sfdc.entity" value="Account"/>
-            <entry key="dataAccess.name" value="exports/01-18-2017/Account_backup-01-18-2017_10-57-33_Updated.csv"/>
-            <entry key="sfdc.debugMessagesFile" value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log.csv"/>
+            <entry key="dataAccess.name" value="exports/01-18-2017/Account_backup-01-18-2017_11-36-24_Updated.csv"/>
+            <entry key="sfdc.debugMessagesFile" value="logs/01-18-2017/Account_backup-01-18-2017_11-36-24_log.csv"/>
             <entry key="process.mappingFile"  value="config/AccountFields.sdl"/>
-            <entry key="process.outputError"  value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log_error.csv"/>
-            <entry key="process.outputSuccess" value="logs/01-18-2017/Account_backup-01-18-2017_10-57-33_log_Success.csv"/>
+            <entry key="process.outputError"  value="logs/01-18-2017/Account_backup-01-18-2017_11-36-24_log_error.csv"/>
+            <entry key="process.outputSuccess" value="logs/01-18-2017/Account_backup-01-18-2017_11-36-24_log_Success.csv"/>
         </map>
      </property> 
     </bean>
